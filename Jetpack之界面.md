@@ -240,4 +240,3 @@ webview.loadUrl("file:///android_asset/test.html");
 4. 前进：webview.goForward();
 5. 判断是否能后退或者前进：webview.canGoBackOrForward(int steps);
 6. 后退或者前进：webview.goBackOrForward(int steps);
-
