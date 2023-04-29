@@ -4,7 +4,7 @@
 
 其中App Shortcuts是指在桌面长按app图标而出现的快捷方式, 可以为你的app的关键功能添加更快速的入口而不用先打开app,点击快捷方式可以访问应用功能, 并且这种快捷方式也可以被拖拽到桌面单独放置, 变成单独的桌面快捷方式。
 
-<img src="https://upload-images.jianshu.io/upload_images/25584137-f9a9740214c6fb93.png"/><img src="https://upload-images.jianshu.io/upload_images/25584137-6b342b0803665802.png"/>
+<img src="https://upload-images.jianshu.io/upload_images/25584137-f9a9740214c6fb93.png" style="zoom: 50%;" /><img src="https://upload-images.jianshu.io/upload_images/25584137-6b342b0803665802.png" style="zoom:50%;" />
 
 
 
