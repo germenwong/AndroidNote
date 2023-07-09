@@ -153,6 +153,8 @@ paint一般提供绘制使用的颜色和风格信息----->可以理解为**画�
 
 ### 实现流程 
 
+思维导图网址：https://boardmix.cn/app/editor/TXjJzbrv9TibaXoyuWWvIw
+
 <img src="自定义View/image-20230628113733292.png" alt="image-20230628113733292" style="zoom:150%;" />
 
 #### 自定义组合控件
