@@ -103,17 +103,18 @@ dependencies {
 
 //动画预览
 
-最后一步需要定义一个启动主题，打开 `theme.xml`，替换掉原有的默认主题，它会在启动完成之后自动切换回我们默认的主题。
+打开 `values/theme.xml`文件，自定义启动主题，它用于替换掉 `MainActivity` 原有的默认主题并且在启动完成之后自动切换回我们默认的主题。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 默认主题 -->
 	<style 
 		name="Theme.AnimationsSplashScreenApi"
         parent="android:Theme.Material.Light.NoActionBar" />
     
     
-    <!-- 自定义样式用于启动时替换 -->
+    <!-- 启动主题 -->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
     	<item name="android:windowSplashScreenAnimatedIcon">
         	@drawable/animated_logo
@@ -126,16 +127,73 @@ dependencies {
 前往注册清单引用该主题
 
 ```xml
- <application
-        ...
-        android:theme="@style/Theme.App.Starting"
-        tools:targetApi="31">
-        <activity
-           ...
-            android:theme="@style/Theme.App.Starting">
-           ...
-        </activity>
-    </application>
+<application
+    ...
+    android:theme="@style/Theme.App.Starting"
+    tools:targetApi="31">
+    <activity
+       ...
+        android:theme="@style/Theme.App.Starting">
+       ...
+    </activity>
+</application>
 ```
 
-在 `MainActivity`
+最后一步在 `MainActivity` 中调用 `installSplashScreen` 方法并配置相应的设置。注意：该方法一定要在 `onCreate()` 方法之前执行。
+
+```kotlin
+class MainActivity : ComponentActivity() {
+
+      private val viewModel by viewModels<MainViewModel>()
+
+      override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            installSplashScreen().apply {
+                  // 设置停留在闪屏页上的条件，当条件为false的时候会一直停留反之进入主界面
+                  setKeepOnScreenCondition {
+                        !viewModel.isReady.value
+                  }
+                  //设置退出动画监听器，实现动画缩小并进入主界面
+                  setOnExitAnimationListener { screen ->
+                        val zoomX = ObjectAnimator.ofFloat(
+                              screen.iconView,
+                              View.SCALE_X,
+                              0.4f,
+                              0.0f
+                        ).apply {
+                              interpolator = OvershootInterpolator()
+                              duration = 500L
+                              doOnEnd { screen.remove() }
+                        }
+
+                        val zoomY = ObjectAnimator.ofFloat(
+                              screen.iconView,
+                              View.SCALE_Y,
+                              0.4f,
+                              0.0f
+                        ).apply {
+                              interpolator = OvershootInterpolator()
+                              duration = 1000L
+                              doOnEnd { screen.remove() }
+                        }
+
+                        zoomX.start()
+                        zoomY.start()
+                  }
+            }
+
+            setContent {
+                  AnimationsSplashScreenApiTheme {
+                        Surface(
+                              modifier = Modifier.fillMaxSize(),
+                              color = MaterialTheme.colorScheme.background
+                        ) {}
+                  }
+            }
+      }
+}
+```
+
+
+

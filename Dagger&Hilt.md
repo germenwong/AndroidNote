@@ -76,7 +76,7 @@ data class People constructor(val name: String) {
 lateinit var people:People
 ```
 
-#### *1.3 * 标记方法
+#### *1.3* 标记方法
 
 - 被标记的方法可以有 0 个或多个==依赖==作为参数。
 - 方法不能是抽象的。

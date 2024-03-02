@@ -99,6 +99,7 @@ Button(
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
+</manifest>
 ```
 
 <img src="Intent&IntentFilters/Intent隐式示例1.gif" alt="Intent隐式示例1" style="zoom:67%;" />
